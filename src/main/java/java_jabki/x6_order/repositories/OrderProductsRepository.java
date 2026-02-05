@@ -1,0 +1,66 @@
+package java_jabki.x6_order.repositories;
+
+import java_jabki.x6_order.mappers.OrderProductsMapper;
+import java_jabki.x6_order.model.OrderProducts;
+import lombok.AllArgsConstructor;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@AllArgsConstructor
+public class OrderProductsRepository {
+
+    private static final String INSERT = """
+            INSERT INTO  x6_order.order_products(order_id, product_id , quantity, comments)
+            VALUES (:order_id, :product_id , :quantity, :comments)
+            RETURNING *;
+            """;
+    private static final String UPDATE = """
+            UPDATE  x6_order.order_products
+            SET  quantity = :quantity,
+                update_date = now()
+            WHERE order_id = :order_id
+            RETURNING *;
+            """;
+    private static final String DELETE = """
+            DELETE x6_order.order_products
+            WHERE order_id = :order_id
+            """;
+    private static final String GET_BY_ID = """
+            SELECT *
+            FROM x6_order.order_products
+            WHERE order_id = :order_id
+            """;
+
+    private final OrderProductsMapper orderProdMapp;
+    private final NamedParameterJdbcTemplate jdbcTemplate;
+
+    public OrderProducts insert(final OrderProducts orderProd) {
+        return jdbcTemplate.queryForObject(INSERT, orderProdParamForSql(orderProd), orderProdMapp);
+    }
+
+    public OrderProducts update(final OrderProducts orderProd) {
+        return jdbcTemplate.queryForObject(UPDATE, orderProdParamForSql(orderProd), orderProdMapp);
+    }
+
+    public void delete(final Long id) {
+        jdbcTemplate.update(DELETE, new MapSqlParameterSource("order_id", id));
+    }
+
+    public OrderProducts getById(final Long id) {
+        return jdbcTemplate.queryForObject(GET_BY_ID, new MapSqlParameterSource("order_id", id), orderProdMapp);
+
+    }
+
+    public MapSqlParameterSource orderProdParamForSql(final OrderProducts orderProd) {
+        final MapSqlParameterSource params = new MapSqlParameterSource();
+
+        params.addValue("order_id", orderProd.getOrderId());
+        params.addValue("product_id", orderProd.getProductId());
+        params.addValue("quantity", orderProd.getQuantity());
+        params.addValue("comments", orderProd.getComments());
+        params.addValue("update_date", orderProd.getUpdateDate());
+        return params;
+    }
+}
