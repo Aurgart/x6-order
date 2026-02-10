@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -15,5 +14,5 @@ public class OrderProducts {
     private int productId;
     private int quantity;
     private String comments;
-    private Date updateDate;
+    private LocalDate updateDate;
 }

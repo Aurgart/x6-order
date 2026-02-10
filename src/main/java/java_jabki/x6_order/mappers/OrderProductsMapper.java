@@ -17,7 +17,7 @@ public class OrderProductsMapper implements RowMapper<OrderProducts> {
                 .productId(rs.getInt("product_id"))
                 .quantity(rs.getInt("quantity"))
                 .comments(rs.getString("comments"))
-                .updateDate(rs.getDate("update_date"))
+                .updateDate(rs.getObject("update_date", LocalDate.class))
                 .build();
     }
 }

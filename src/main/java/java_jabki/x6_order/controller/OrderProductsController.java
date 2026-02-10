@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/order_product")
 @Tag(name ="Заказики-товары")
 public class OrderProductsController {
-    private final OrderProductService itemService;
+    private final OrderProductService orderProductService;
 
     @PostMapping
     @Operation(summary = "Создать товар")
     public OrderProducts create(@RequestBody OrderProducts item){
-        return itemService.addOrderProduct(item);
+        return orderProductService.addOrderProduct(item);
     }
 }

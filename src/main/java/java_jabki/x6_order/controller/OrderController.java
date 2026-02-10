@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/order")
 @Tag(name ="Заказики")
 public class OrderController {
-    private final OrderService orders;
+    private final OrderService orderService;
 
     @PostMapping
     @Operation(summary = "Создать заказ")
     public Order create(@RequestBody Order ord){
-        return orders.addOrder(ord);
+        return orderService.addOrder(ord);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Чекнуть заказ")
     public Order getById(@PathVariable("id") String id){
-        return orders.getbyId(Long.parseLong(id));
+        return orderService.getbyId(Long.parseLong(id));
     }
 }

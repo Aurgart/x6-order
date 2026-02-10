@@ -32,7 +32,7 @@ public class OrderService {
 
     private void validateOrder(Order ord){
         if(!users.CheckUser(ord.getUserId())) {
-            throw new OrderException("User not found");
+            throw new OrderException("Пользователь не найден");
         }
     }
 }
