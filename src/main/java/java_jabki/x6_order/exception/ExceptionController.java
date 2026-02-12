@@ -1,4 +1,4 @@
-package java_jabki.x6_order.controller;
+package java_jabki.x6_order.exception;
 
 import java_jabki.x6_order.model.ApiError;
 import org.springframework.http.ResponseEntity;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class ExceptionsController {
+public class ExceptionController {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> handleAllException(final Exception badRequestException) {
         return ResponseEntity.badRequest().body(new ApiError(false, badRequestException.getMessage()));

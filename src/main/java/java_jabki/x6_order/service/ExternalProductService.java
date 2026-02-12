@@ -13,7 +13,7 @@ public class ExternalProductService {
         this.restClient  = RestClient.builder().baseUrl("http://localhost:8086/api/v1").build();
     }
 
-    public boolean GetProduct(long productId){
+    public boolean getProduct(long productId){
         ProductStatus exist = restClient.get().uri("/product/item/{id}",productId).retrieve().body(ProductStatus.class);
         return exist.status;
     }

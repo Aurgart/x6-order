@@ -13,7 +13,7 @@ public class ExternalUserService {
         this.restClient  = RestClient.builder().baseUrl("http://localhost:8085/api/v1").build();
     }
 
-    public boolean CheckUser(long userId){
+    public boolean checkUser(long userId){
         UserStatus exist = restClient.get().uri("/user/check/{id}",userId).retrieve().body(UserStatus.class);
         return exist.status;
     }

@@ -44,7 +44,7 @@ class X6OrderTests {
                                 .orderDate(LocalDate.now())
                                 .build())
         );*/
-        RuntimeException excp = assertThrows(RuntimeException.class, () -> orderService.addOrder(Order.builder().orderId(1).userId(0).description("Test").orderDate(LocalDate.now()).build()));
+        RuntimeException excp = assertThrows(RuntimeException.class, () -> orderService.addOrder(Order.builder().orderId(1L).userId(0L).description("Test").orderDate(LocalDate.now()).build()));
         Assertions.assertNotNull(excp.getMessage());
     }
 

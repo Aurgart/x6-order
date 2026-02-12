@@ -1,7 +1,6 @@
 package java_jabki.x6_order;
 
-import java_jabki.x6_order.model.Order;
-import java_jabki.x6_order.model.OrderProducts;
+import java_jabki.x6_order.model.OrderProduct;
 import java_jabki.x6_order.repositories.OrderProductsRepository;
 import java_jabki.x6_order.service.ExternalProductService;
 import java_jabki.x6_order.service.OrderProductService;
@@ -28,9 +27,9 @@ public class X6OrderProductTests {
     @Test
     void createOrderProductTest() {
         RuntimeException excp = assertThrows(RuntimeException.class, () -> orderProductService.addOrderProduct(
-                OrderProducts.builder()
-                        .orderId(1)
-                        .productId(9)
+                OrderProduct.builder()
+                        .orderId(1L)
+                        .productId(9L)
                         .comments("Test")
                         .quantity(100)
                         .updateDate(LocalDate.now())

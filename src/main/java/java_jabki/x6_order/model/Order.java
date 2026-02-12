@@ -10,8 +10,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class Order {
-    private int orderId;
-    private int userId;
+    private Long orderId;
+    private Long userId;
     private LocalDate orderDate;
     private String description;
 }

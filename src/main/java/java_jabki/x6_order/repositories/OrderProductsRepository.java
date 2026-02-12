@@ -1,7 +1,7 @@
 package java_jabki.x6_order.repositories;
 
-import java_jabki.x6_order.mappers.OrderProductsMapper;
-import java_jabki.x6_order.model.OrderProducts;
+import java_jabki.x6_order.repositories.mapper.OrderProductsMapper;
+import java_jabki.x6_order.model.OrderProduct;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -27,7 +27,7 @@ public class OrderProductsRepository {
             DELETE x6_order.order_products
             WHERE order_id = :order_id
             """;
-    private static final String GET_BY_ID = """
+    private static final String GET_BY_ORDER_ID = """
             SELECT *
             FROM x6_order.order_products
             WHERE order_id = :order_id
@@ -36,11 +36,11 @@ public class OrderProductsRepository {
     private final OrderProductsMapper orderProdMapp;
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
-    public OrderProducts insert(final OrderProducts orderProd) {
+    public OrderProduct insert(final OrderProduct orderProd) {
         return jdbcTemplate.queryForObject(INSERT, orderProdParamForSql(orderProd), orderProdMapp);
     }
 
-    public OrderProducts update(final OrderProducts orderProd) {
+    public OrderProduct update(final OrderProduct orderProd) {
         return jdbcTemplate.queryForObject(UPDATE, orderProdParamForSql(orderProd), orderProdMapp);
     }
 
@@ -48,12 +48,12 @@ public class OrderProductsRepository {
         jdbcTemplate.update(DELETE, new MapSqlParameterSource("order_id", id));
     }
 
-    public OrderProducts getById(final Long id) {
-        return jdbcTemplate.queryForObject(GET_BY_ID, new MapSqlParameterSource("order_id", id), orderProdMapp);
-
+    public OrderProduct getByOrderId(final Long id) {
+        return jdbcTemplate.queryForObject(GET_BY_ORDER_ID, new MapSqlParameterSource("order_id", id), orderProdMapp);
     }
 
-    public MapSqlParameterSource orderProdParamForSql(final OrderProducts orderProd) {
+
+    public MapSqlParameterSource orderProdParamForSql(final OrderProduct orderProd) {
         final MapSqlParameterSource params = new MapSqlParameterSource();
 
         params.addValue("order_id", orderProd.getOrderId());

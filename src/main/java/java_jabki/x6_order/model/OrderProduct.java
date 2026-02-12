@@ -9,9 +9,9 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @Builder
-public class OrderProducts {
-    private int orderId;
-    private int productId;
+public class OrderProduct {
+    private Long orderId;
+    private Long productId;
     private int quantity;
     private String comments;
     private LocalDate updateDate;

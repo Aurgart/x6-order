@@ -31,7 +31,7 @@ public class OrderService {
     }
 
     private void validateOrder(Order ord){
-        if(!users.CheckUser(ord.getUserId())) {
+        if(!users.checkUser(ord.getUserId())) {
             throw new OrderException("Пользователь не найден");
         }
     }

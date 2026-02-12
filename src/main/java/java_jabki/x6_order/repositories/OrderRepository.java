@@ -1,6 +1,6 @@
 package java_jabki.x6_order.repositories;
 
-import java_jabki.x6_order.mappers.OrderMapper;
+import java_jabki.x6_order.repositories.mapper.OrderMapper;
 import java_jabki.x6_order.model.Order;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
