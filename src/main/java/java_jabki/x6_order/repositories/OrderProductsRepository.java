@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @AllArgsConstructor
 public class OrderProductsRepository {
@@ -48,8 +50,8 @@ public class OrderProductsRepository {
         jdbcTemplate.update(DELETE, new MapSqlParameterSource("order_id", id));
     }
 
-    public OrderProduct getByOrderId(final Long id) {
-        return jdbcTemplate.queryForObject(GET_BY_ORDER_ID, new MapSqlParameterSource("order_id", id), orderProdMapp);
+    public List<OrderProduct> getByOrderId(final Long id) {
+        return jdbcTemplate.query(GET_BY_ORDER_ID, new MapSqlParameterSource("order_id", id), orderProdMapp);
     }
 
 
