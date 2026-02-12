@@ -4,10 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import java_jabki.x6_order.exception.OrderException;
 import java_jabki.x6_order.model.Order;
 import java_jabki.x6_order.model.OrderProduct;
-import java_jabki.x6_order.model.UserStatus;
 import java_jabki.x6_order.repositories.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -19,9 +20,11 @@ public class OrderService {
 
     public Order addOrder(Order ord){
         validateOrder(ord);
-        orders.insert(ord);
+        List<OrderProduct> tmpProducts = ord.getOrderProducts();
+        ord = orders.insert(ord);
 
-        for (OrderProduct orderProduct : ord.getOrderProducts()){
+        for (OrderProduct orderProduct : tmpProducts){
+            orderProduct.setOrderId(ord.getOrderId());
             orderProducts.addOrderProduct(orderProduct);
         }
         try {
